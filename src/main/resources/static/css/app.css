@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+#table{
+	margin:20px;
+	
+}
+#header{
+
+	height:85px;
+	background-color:#ff8c00;
+}
+#link{
+	margin:10px;
+	text-decoration:none; 
+	color:#ffffff;
+}
+#fotter{
+	height:85px;
+	background-color:#ff8c00;
+}
+#login{
+	margin:15px;
+	border:1px solid;
+	border-color:#ff8c00;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/home.css}" type="text/css">
+<title>ゲストページ</title>
+</head>
+<body>
+ <div th:include="gestapp :: frag_header_new"></div>
+<div class="main">
+	<div th:include="user :: frag_category"></div>
+<div>
+		<div id="tab1">
+			<div th:object="${articles}">]
+		 	<strong><p th:text="*{title}"></p></strong>
+		 	<br />
+			<p th:text="*{content}"></p>
+			<br />
+			<div id="p">
+			<p th:text="*{created_at}"></p>
+			<p th:text="*{category.category}"></p>
+			</div>
+			<hr />
+			</div>
+			<div>他の人のコメント</div><hr/>
+			コメント
+			<hr/>
+			<div>
+			<textarea name="content" cols="50" rows="15"></textarea>
+		</div>
+</div>
+</div>
+</div>
+</body>
+</html>

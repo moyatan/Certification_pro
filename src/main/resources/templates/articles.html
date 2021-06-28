@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<meta charset="UTF-8">
+<title>記事投稿画面</title>
+</head>
+<body>
+<div th:include="gestapp :: frag_header_logout"></div>
+<form th:action="@{articles}" method="post">
+<table align="center">
+	<tr>
+		<td>
+			<span>記事のタイトル</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="text" name="title" size="50"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span>本文</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<textarea name="content" cols="50" rows="15"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span>カテゴリ</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<select name="category">
+				<option th:each="obj:${select}" th:value="${obj.key}" th:text="${obj.value}">
+				</option>
+			</select>
+				<input type="button" value="追加"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="text" name="tag"size="50"/>
+			<input type="button" value="タグを追加"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="submit" value="投稿する"/>
+		</td>
+	</tr>
+</table>
+</form>
+<div id="fotter"></div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<title>ホームページ</title>
+</head>
+<body>
+<div th:include="app :: frag_header"></div>
+<div>
+<div th:fragment="frag_category">
+<span id="tab">資格一覧</span><br/>
+<div th:each="obj : ${select}">
+<a href="#" th:text="${obj.value}" th:data-category="${obj.key}"></a><br/>
+</div>
+<input type="text" name="search" size="18" id="search"placeholder="記事のタイトル検索"/>
+</div>
+<div>
+<span>最新の記事</span>
+<span>おすすめの記事</span>
+<span>人気の記事</span>
+<span>お気に入りにした記事</span>
+</div>
+</div>
+</body>
+</html>

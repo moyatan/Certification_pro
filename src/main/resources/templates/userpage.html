@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<meta charset="UTF-8">
+<title>マイページ</title>
+</head>
+<body>
+<div th:include="app :: frag_header"></div>
+<table th:each="obj : ${articleslist}" align="center">
+<tr>
+<td th:text="${obj.title}"></td>
+</tr>
+<tr>
+<td th:text="${obj.created_at}"></td>
+</tr>
+<tr>
+<td>
+<a href="edit">編集</a>
+<a href="delete">削除</a>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/home.css}" type="text/css">
+<title>ゲストページ</title>
+</head>
+<body>
+ <div th:include="gestapp :: frag_header_new"></div>
+<div class="main">
+	<div th:include="user :: frag_category" id="category"></div>
+<div>
+<div id="sorttab">
+	<span id = "tab" data-sort="new">最新の記事</span>
+	<span id = "tab" data-sort="popular">人気の記事</span>
+	</div>
+		<div id="tab1" th:fragment="sample">
+			<div th:each="obj : ${articleslist}" id ="tab3">
+					<a th:href="@{/(id=${obj.id})}"th:text="${obj.title}" id="title"></a>
+					<p th:text="${obj.created_at}"id="message"></p>
+				
+			</div>
+		</div>
+</div>
+</div>
+ <script src="/javascript/home.js"></script>
+ <script src="/javascript/gesthome.js"></script>
+</body>
+</html>

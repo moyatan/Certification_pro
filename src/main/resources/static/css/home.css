@@ -1,0 +1,23 @@
+@charset "UTF-8";
+.main {
+	display: flex;
+	justify-content:space-around;
+}
+
+#tab{
+	background-color:#ff8c00;
+	color: #ffffff;
+}
+#tab1{
+	 border:3px solid #ff8c00;
+     padding:20px;
+     
+}
+#tab2{
+	 border:3px solid #ff8c00;
+     padding:20px;
+}
+#tab3{
+	 border:3px solid #ff8c00;
+     padding:20px;
+}

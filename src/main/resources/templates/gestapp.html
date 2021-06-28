@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="app.css">
+<style th:fragment="frag_style">
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- ログイン -->
+<div th:fragment="frag_header_login">
+<div id ="header">
+<table align="right"id="table">
+<tr>
+<td>
+<a href="/contactus" id="link">お問い合わせ</a>
+<a href="/login" id="link">ログイン</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+
+<!-- ログアウト -->
+<div th:fragment="frag_header_logout">
+<div id ="header">
+<table align="right"id="table">
+<tr>
+<td>
+<a href="/articles" id="link">新規投稿</a>
+<a href="/contactus" id="link">お問い合わせ</a>
+<a href="/logout" id="link">ログアウト</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+
+<!-- 新規登録 -->
+<div th:fragment="frag_header_new">
+<div id ="header">
+<table align="right"id="table">
+<tr>
+<td>
+<a href="/contactus" id="link">お問い合わせ</a>
+<a href="/signup" id="link">新規登録</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="fotter">
+</div>
+
+<!-- ページ -->
+<ul th:fragment="frag_page">
+      <li th:class="${articleslist.first} ? 'disabled':''" style="display:inline">
+  　　　　<span th:if="${articleslist.first}">≤≤</span>
+                    <a th:if="${not articleslist.first}" th:href="@{${url}(page=1)}">≤≤</a>
+                </li>
+                <li th:each='i : ${#numbers.sequence(0, articleslist.totalPages-1)}' th:class="(${i}==${articleslist.number})? 'active' : ''" style="display:inline">
+                    <span th:if='${i}==${articleslist.number}' th:text='${i+1}'>1</span>
+                    <a th:if='${i}!=${articleslist.number}' th:href="@{${url}(page=${i+1})}">
+                        <span th:text='${i+1}'>1</span>
+                    </a>
+                </li>
+                <li th:class="${articleslist.last} ? 'disabled':''" style="display:inline">
+                    <span th:if="${articleslist.last}">≥≥</span>
+                    <a th:if="${not articleslist.last}" th:href="@{${url}(page=(${articleslist.totalPages}))}">≥≥</a>
+                </li>
+            </ul>
+</body>
+</html>
