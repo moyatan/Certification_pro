@@ -1,10 +1,13 @@
 package Certification.app.controller;
 
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import Certification.app.model.Account;
 import Certification.app.model.Articles;
+import Certification.app.model.Comments;
 import Certification.app.repository.ArticlesRepository;
 import Certification.app.repository.CategoryRepository;
+import Certification.app.repository.CommentsRepository;
 import Certification.app.repository.UserRepository;
 import Certification.app.service.ArticlesService;
 import Certification.app.service.CategoryCreate;
@@ -40,6 +45,9 @@ public class HomeController {
 	@Autowired
 	CategoryRepository cm;
 	
+	@Autowired
+	CommentsRepository commentrepository;
+	
 	//URLのパラメーターが？で書かれてる時はRequestParamを使う
 	@RequestMapping(value={"/"},method=RequestMethod.GET)
 	public String getHome(Model model,
@@ -64,7 +72,9 @@ public class HomeController {
 
 			long id = Long.parseLong(articlesId);
 			Articles article = articlesservice.getAtricle(id);
-			System.out.println(article.getTitle());
+			System.out.println("記事のタイトル" + article.getTitle());
+			List<Comments> list = commentrepository.findByIdAll(id);
+			model.addAttribute("comments",list);
 			model.addAttribute("articles",article);
 			return "show";
 		}
@@ -115,8 +125,32 @@ public class HomeController {
 		System.out.println(text);
 		return "gesthome :: sample";
 	}
+	
+	@Transactional
+	@RequestMapping(value= {"/comment"},method=RequestMethod.GET)
+	public String comment(@RequestParam("text") String text,@RequestParam("hidden")long hidden,Model model) {
+		System.out.println(text);
+		System.out.println(hidden);
+		Articles articles = art.findById(hidden);
+		Account account = logincheck.LoginCheck();
+		Comments comments = new Comments();
+		comments.setAccount(account);
+		comments.setContent(text);
+		comments.setArticles(articles);
+		Timestamp time = new Timestamp(System.currentTimeMillis());
+		comments.setCreated_at(time);
+		try {
+		commentrepository.saveAndFlush(comments);
+		System.out.println("無事完了");
+		List<Comments> list = commentrepository.findByIdAll(articles.getId());
+		model.addAttribute("comments",list);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "show :: comment";
+	}
+	
 	public  void setPage(Model model,Page<Articles> articlesList) {
-		System.out.println("aaa");
 		model.addAttribute("articleslist",articlesList);
 		model.addAttribute("url", "/");
 		model.addAttribute("words",articlesList.getContent());

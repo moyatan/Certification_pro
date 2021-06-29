@@ -61,6 +61,7 @@ public class ArticlesController {
 			System.out.println(str);
 			return "error";
 		}
+		System.out.println("記事のタイトル" + articles.getTitle());
 		System.out.println(id);
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		Account account = logincheck.LoginCheck();

@@ -44,4 +44,28 @@ const count = () =>{
   a.outerHTML = body;
   });
   }
+  
+  const button = document.getElementById('button');
+  console.log(button);
+  button.addEventListener('click',(e) => comment(e));
+  const comment = (e) =>{
+  let textarea =document.getElementById('text');
+  let text =  textarea.value;
+  let  hidden =document.getElementById('hidden').value;
+console.log(hidden);
+  const c = document.getElementById('comments');
+  
+  fetch("/comment?text=" + text + "&hidden=" + hidden,{
+  method:"get"}).then(response => {
+  return response.text();
+  }).then(body => {
+  console.log('aa',body);
+  console.log('テキスト');
+  c.outerHTML = body;
+  textarea.value = '';
+  console.log(text);
+  });
+  }
+  
+  
 })();
