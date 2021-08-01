@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/home.css}" type="text/css">
+<title>ゲストページ</title>
+</head>
+<body>
+	<div th:include="app :: frag_header_new"></div>
+	<div class="main">
+		<div th:include="app :: frag_category" id="categoryList"></div>
+		<div>
+			<div id="sortTab">
+				<span id="tab" data-sort="new">最新の記事</span> <span id="tab"
+					data-sort="popular">閲覧数が多い記事</span>
+				<div id="article">
+					<div th:object="${articles}">
+						<p th:text="|投稿者:　*{account.name}|"></p>
+						<div>
+							<p th:text="|タイトル：　*{title}|"></p>
+							<p th:text="${favoriteCount}"></p>
+						</div>
+						<br />
+						<p th:text="*{content}"></p>
+						<br />
+						<div id="p">
+							<p th:text="*{created_at}"></p>
+							<p th:text="*{categorymodel.category}"></p>
+						</div>
+						<br />
+						<div th:if="${commentsList}">
+						<hr />
+						<div th:fragment="comment" id="commentArea">
+							<div th:each="obj : ${commentsList}">
+
+								<p th:text="|投稿者：　${obj.account.name}|"></p>
+								<p th:text="${obj.content}"></p>
+								<p th:text="|投稿日時：　${obj.created_at}|"></p>
+							</div>
+							<hr />
+						</div>
+						</div>
+					</div>
+					<br /> コメント
+					<hr />
+					<div>
+						<a th:href="@{/login}">コメント機能を使うにはログインをしてください</a>
+					</div>
+					<hr />
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/javascript/home.js"></script>
+	<script src="/javascript/category.js"></script>
+	<script src="/javascript/title.js"></script>
+	<script src="/javascript/favorite.js"></script>
+	<script src="/javascript/comment.js"></script>
+</body>
+</html>

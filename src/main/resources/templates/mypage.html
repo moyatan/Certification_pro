@@ -5,27 +5,26 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
 <link rel="stylesheet" th:href="@{/css/home.css}" type="text/css">
-<title>ゲストページ</title>
+<title>マイページ</title>
 </head>
 <body>
- <div th:include="app :: frag_header_login"></div>
-<div class="main" id="categoryList">
-	<div th:include="app :: frag_category" id="categoryList"></div>
-<div>
-<div id="sortTab">
-	<span id = "tab" data-sort="new">最新の記事</span>
-	<span id = "tab" data-sort="popular">閲覧数が多い記事</span>
-	</div>
-		<div id="article" th:fragment="articleList">
+ <div th:include="app :: frag_header_logout"></div>
+ <div align="center">
+ <h1>投稿した記事一覧</h1>
+
 			<div th:each="obj : ${articlesList}">
-			<div th:if="${obj.delete_flag == 0}"id="tab3">
+			<div th:if="${obj.delete_flag == 0}">
 					<a th:href="@{/articlesShow(id=${obj.id})}"th:text="${obj.title}" id="title"></a>
 					<p th:text="${obj.created_at}"id="message"></p>
+				<form th:action="@{/edit}" method="post">
+				<button type="submit" name="action" value="edit">編集</button>
+				<button type="submit" name="action" value="delete">削除</button>
+				<input type="hidden" th:value="${obj.id}"name="articleId"/>
+				</form>
 				</div>
 			</div>
-		</div>
-</div>
-</div>
+			</div>
+
  <script src="/javascript/home.js"></script>
  <script src="/javascript/category.js"></script>
  <script src="/javascript/title.js"></script>

@@ -5,15 +5,13 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
 <link rel="stylesheet" th:href="@{/css/home.css}" type="text/css">
-<title>お問い合わせページ</title>
+<title>ログアウト</title>
 </head>
 <body>
-<div th:include="app :: frag_header_new"></div>
-<div align="center">
-<form th:action="@{/contactus}" method="post">
-<input type="text" name="email" size ="40" placeholder="登録してるメールアドレスを入力してください"/>
-<input type="submit" value="送信">
+ <div th:include="app :: frag_header_logout"></div>
+ <form th:action="@{/logout}" method="post">
+ <p>ログアウトしてください</p>
+  <button type="submit">ログアウト</button>
 </form>
-</div>
 </body>
 </html>

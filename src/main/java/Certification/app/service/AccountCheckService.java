@@ -8,14 +8,14 @@ import Certification.app.model.Account;
 import Certification.app.repository.UserRepository;
 
 @Service
-public class LoginCheckService {
+public class AccountCheckService {
 	
 	@Autowired
-	UserRepository userrepository;
+	UserRepository userRepository;
 	
-	public Account LoginCheck() {
-	String usermail = SecurityContextHolder.getContext().getAuthentication().getName();
-	Account account = userrepository.findByEmail(usermail);
+	public Account checkAuthentication() {
+	String userMail = SecurityContextHolder.getContext().getAuthentication().getName();
+	Account account = userRepository.findByEmail(userMail);
 	
 	return account;
 	}

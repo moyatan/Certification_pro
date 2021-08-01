@@ -19,7 +19,7 @@ public class LoginController {
 	
     
 	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public String getlogin() {
+	public String getLogin() {
 		//ログインしてるユーザーかどうか確認する
 
 		return "login";
@@ -27,7 +27,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String postlogin() {
+	public String postLogin() {
 		return "login";
 	}
 }

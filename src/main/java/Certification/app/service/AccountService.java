@@ -21,12 +21,17 @@ public class AccountService {
 	UserRepository user;
 	
 	public Account create(CopyAccount cpAccount,String rawPassword) {
+		try {
 		String enPass = pass.encode(rawPassword);
 		System.out.println("ハッシュコード" + enPass);
 		Account account = new Account();
 		BeanUtils.copyProperties(cpAccount, account);
 		account.setPassword(enPass);
          return user.saveAndFlush(account);
+	}catch(Exception e) {
+		e.printStackTrace();
+		Account accoun = new Account();
+		return accoun;
 	}
-
+	}
 }

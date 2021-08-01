@@ -59,17 +59,23 @@ public class Articles {
 	@JoinColumn(name="account_id",nullable=false)
 	private Account account;
 	
+	@Column(name="favorite_count")
+	private int favoriteCount;
+	
+	@Column(name="delete_flag",nullable=true)
+	private int delete_flag;
+	
 //	@ManyToOne
 //	private Qualifications qualifications;
 //	
 //	//記事一つにつきコメントは複数ある
-//	@OneToMany(cascade=CascadeType.ALL)
-//	@Column(nullable=true)
-//	private List<Comments> comments;
-//	
-//	@OneToMany(cascade=CascadeType.ALL)
-//	@Column(nullable=true)
-//	private List<Favorites> favorites;
+	@OneToMany(cascade=CascadeType.ALL)
+	@Column(nullable=true)
+	private List<Comments> comments;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@Column(nullable=true)
+	private List<Favorites> favorites;
 	
 	public Articles() {
 		
@@ -128,21 +134,21 @@ public class Articles {
 //		this.qualifications = qualifications;
 //	}
 //
-//	public List<Comments> getComments() {
-//		return comments;
-//	}
-//
-//	public void setComments(List<Comments> comments) {
-//		this.comments = comments;
-//	}
-//
-//	public List<Favorites> getFavorites() {
-//		return favorites;
-//	}
-//
-//	public void setFavorites(List<Favorites> favorites) {
-//		this.favorites = favorites;
-//	}
+	public List<Comments> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
+	}
+
+	public List<Favorites> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(List<Favorites> favorites) {
+		this.favorites = favorites;
+	}
 
 	public String getTag() {
 		return tag;
@@ -150,14 +156,6 @@ public class Articles {
 
 	public void setTag(String tag) {
 		this.tag = tag;
-	}
-
-	public CategoryModel getCategory() {
-		return categorymodel;
-	}
-
-	public void setCategory(CategoryModel categorymodel) {
-		this.categorymodel = categorymodel;
 	}
 
 	public CategoryModel getCategorymodel() {
@@ -174,6 +172,22 @@ public class Articles {
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	public int getFavoriteCount() {
+		return favoriteCount;
+	}
+
+	public void setFavoriteCount(int favoriteCount) {
+		this.favoriteCount = favoriteCount;
+	}
+
+	public int getDelete_flag() {
+		return delete_flag;
+	}
+
+	public void setDelete_flag(int delete_flag) {
+		this.delete_flag = delete_flag;
 	}
 	
 	

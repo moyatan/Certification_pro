@@ -7,5 +7,7 @@ import Certification.app.model.CategoryModel;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryModel,Long>{
+	
+	CategoryModel findById(long categoryId);
 
 }

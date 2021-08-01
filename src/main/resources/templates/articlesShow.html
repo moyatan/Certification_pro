@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/home.css}" type="text/css">
+<title>ゲストページ</title>
+</head>
+<body>
+	<div th:include="app :: frag_header_logout"></div>
+	<div class="main">
+		<div th:include="app :: frag_category" id="categoryList"></div>
+		<div>
+			<div id="sortTab">
+				<span id="tab" data-sort="new">最新の記事</span> 
+				<span id="tab" data-sort="popular">閲覧数の多い記事</span>
+				<span id = "tab" data-sort="favorite">お気に入りにした記事</span>
+				<div id="article">
+					<div th:object="${articles}">
+						<p th:text="|投稿者:　*{account.name}|"></p>
+						<div>
+							<p th:text="|タイトル：　*{title}|"></p>
+							<p id="favorite">お気に入り</p>
+							<p th:text="${favoriteCount}"></p>
+						</div>
+						<br />
+						<p th:text="*{content}"></p>
+						<br />
+						<div id="p">
+							<p th:text="*{created_at}"></p>
+							<p th:text="*{categorymodel.category}"></p>
+						</div>
+						<br />
+						<hr />
+						<div th:fragment="comment" id="commentArea">
+							<div th:each="obj : ${commentsList}">
+								<div th:if="${obj.account.id == account.id}">
+								<p th:text="|投稿者：　${obj.account.name}|"></p>
+									<p th:text="${obj.content}" style="color:#ff0000;"></p>
+									<p th:text="|投稿日時：　${obj.created_at}|"></p>
+								</div>
+								<div th:unless="${obj.account.id == account.id}">
+								<p th:text="|投稿者：　${obj.account.name}|"></p>
+									<p th:text="${obj.content}"></p>
+									<p th:text="|投稿日時：　${obj.created_at}|"></p>
+								</div>
+								<hr />
+							</div>
+						</div>
+						<br /> コメント
+						<hr />
+						<div>
+							<textarea name="content" cols="50" rows="15" id="comment"></textarea>
+							<br /> <input type="button" value="コメントする" id="button">
+							<input type="hidden" th:value="*{id}" id="articleId">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/javascript/home.js"></script>
+	<script src="/javascript/category.js"></script>
+	<script src="/javascript/title.js"></script>
+	<script src="/javascript/favorite.js"></script>
+	<script src="/javascript/comment.js"></script>
+</body>
+</html>

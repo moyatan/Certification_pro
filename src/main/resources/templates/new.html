@@ -7,9 +7,9 @@
 <title>新規登録画面</title>
 </head>
 <body>
-<div th:include="gestapp::frag_header_login"></div>
+<div th:include="app::frag_header_login"></div>
 <p align="center">新規登録</p>
-<form th:action="@{/signup}" method="post" th:object="${account}">
+<form th:action="@{/signup}" method="post">
 <table align="center">
 	<tr>
 		<td>
@@ -53,7 +53,7 @@
 	</tr>
 	<tr>
 		<td>
-			<input type="text" name="repass"/>
+			<input type="text" name="rePass"/>
 		</td>
 	</tr>
 	<tr>

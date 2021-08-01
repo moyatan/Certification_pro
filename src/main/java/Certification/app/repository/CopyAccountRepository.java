@@ -11,7 +11,7 @@ import Certification.app.model.CopyAccount;
 public interface CopyAccountRepository extends JpaRepository<CopyAccount, Long> {
 	
 	@Query("SELECT c FROM CopyAccount c WHERE uuid = :uuid")
-	public CopyAccount findByAccountCheck(String uuid);
+	public CopyAccount findByCopyAccountCheck(String uuid);
 
 
 }

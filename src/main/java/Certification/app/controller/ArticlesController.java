@@ -25,52 +25,61 @@ import Certification.app.model.CategoryModel;
 import Certification.app.repository.ArticlesRepository;
 import Certification.app.repository.CategoryRepository;
 import Certification.app.service.CategoryCreate;
-import Certification.app.service.LoginCheckService;
+import Certification.app.service.AccountCheckService;
 
 @Controller
 public class ArticlesController {
-	
+
 	@Autowired
-	ArticlesRepository articlesrepository;
-	
+	ArticlesRepository articlesRepository;
+
 	@Autowired
-	CategoryCreate categorycreate;
-	
+	CategoryCreate categoryCreate;
+
 	@Autowired
-	LoginCheckService logincheck;
-	
-	
-	@RequestMapping(value="articles",method=RequestMethod.GET)
+	AccountCheckService accountCheck;
+
+	@Autowired
+	CategoryRepository categoryRepository;
+
+	@RequestMapping(value = "articles", method = RequestMethod.GET)
 	public String getArticles(Model model) {
-		Map<Long,String> categoryMap = categorycreate.categorycreate();
-		model.addAttribute("select",categoryMap);
-		
+		Map<Long, String> categoryList = categoryCreate.createMap();
+		model.addAttribute("categoryList", categoryList);
+
 		return "articles";
 	}
-	
-	@RequestMapping(value="articles",method=RequestMethod.POST)
-	public String postArticles(
-			@ModelAttribute("articles")@Validated(GroupOrder.class)Articles articles,
-			BindingResult result,
-			@RequestParam("category")String id) {
-		if(result.hasErrors()) {
+
+	// ここまでOK
+	@RequestMapping(value = "articles", method = RequestMethod.POST)
+	public String postArticles(@ModelAttribute("articles") @Validated(GroupOrder.class) Articles articles,
+			BindingResult result, @RequestParam("categoryId") long categoryId, Model model) {
+		String URL = "";
+
+		if (result.hasErrors()) {
 			String str = "";
-			for(ObjectError error : result.getAllErrors()) {
+			for (ObjectError error : result.getAllErrors()) {
 				str += error.getDefaultMessage();
 			}
 			System.out.println(str);
 			return "error";
 		}
-		System.out.println("記事のタイトル" + articles.getTitle());
-		System.out.println(id);
-		Timestamp time = new Timestamp(System.currentTimeMillis());
-		Account account = logincheck.LoginCheck();
-		articles.setAccount(account);
-		articles.setCreated_at(time);
-		articlesrepository.saveAndFlush(articles);
-		return "redirect:articles";
-		
+
+		// 現在認証されてるユーザー情報のチェック
+		Account account = accountCheck.checkAuthentication();
+		if (account != null) {
+			CategoryModel categoryModel = categoryRepository.findById(categoryId);
+			Timestamp time = new Timestamp(System.currentTimeMillis());
+			articles.setCategorymodel(categoryModel);
+			articles.setAccount(account);
+			articles.setCreated_at(time);
+			articlesRepository.saveAndFlush(articles);
+			URL = "redirect:articles";
+		} else {
+			model.addAttribute("errorMessage", "ログインしてください");
+			URL = "redirect:login";
+		}
+		return URL;
 	}
-	
 
 }

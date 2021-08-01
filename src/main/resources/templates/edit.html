@@ -4,11 +4,11 @@
 <head>
 <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
 <meta charset="UTF-8">
-<title>記事投稿画面</title>
+<title>編集画面</title>
 </head>
 <body>
 <div th:include="app :: frag_header_logout"></div>
-<form th:action="@{articles}" method="post">
+<form th:action="@{execution}" method="post">
 <table align="center">
 	<tr>
 		<td>
@@ -17,7 +17,7 @@
 	</tr>
 	<tr>
 		<td>
-			<input type="text" name="title" size="50"/>
+			<input type="text" name="title" size="50" th:field="${article.title}"/>
 		</td>
 	</tr>
 	<tr>
@@ -27,7 +27,7 @@
 	</tr>
 	<tr>
 		<td>
-			<textarea name="content" cols="50" rows="15"></textarea>
+			<textarea name="content" cols="50" rows="15" th:field="${article.content}"></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -45,12 +45,13 @@
 	</tr>
 	<tr>
 		<td>
-			<input type="text" name="tag"size="50"placeholder="資格の名称を追加できます"/>
+			<input type="text" name="tag"size="50"placeholder="資格の名称を追加できます" th:value="${article.tag}"/>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input type="submit" value="投稿する"/>
+			<button type="submit" name="execution" value="back">戻る</button>
+				<button type="submit" name="execution" value="regist">実行</button>
 		</td>
 	</tr>
 </table>

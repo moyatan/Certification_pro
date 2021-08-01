@@ -12,5 +12,5 @@ import Certification.app.model.Comments;
 public interface CommentsRepository extends JpaRepository<Comments,Long>{
 	
 	@Query("SELECT c FROM Comments c WHERE  articles_id = :id")
-	List<Comments> findByIdAll(long id);
+	List<Comments> findAllCommentsByArticlesId(long id);
 }

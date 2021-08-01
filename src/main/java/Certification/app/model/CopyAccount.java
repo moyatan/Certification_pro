@@ -21,31 +21,30 @@ import org.springframework.security.core.userdetails.UserDetails;
 import Certification.app.groups.Group1;
 
 @Entity
-@Table(name="CopyUser")
+@Table(name = "CopyUser")
 public class CopyAccount {
-	
-	//主キー
+
+	// 主キー
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	@NotNull
 	private long id;
-	
-	@Column(name="name",nullable=false)
-	@Length(min=1,max=20,message="UserNameは1文字〜２０文字以内にしてください")
+
+	@Column(name = "name", nullable = false)
+	@Length(min = 1, max = 20, message = "UserNameは1文字〜２０文字以内にしてください")
 	private String name;
-	
-	@Column(name="email")
-	@NotEmpty(message="メールアドレスを入力してください")
-	@Pattern(regexp="^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\\.)+[a-zA-Z]{2,}$",
-	message="メールアドレスの形式が正しくありません",groups=Group1.class)
+
+	@Column(name = "email")
+	@NotEmpty(message = "メールアドレスを入力してください")
+	@Pattern(regexp = "^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\\.)+[a-zA-Z]{2,}$", message = "メールアドレスの形式が正しくありません", groups = Group1.class)
 	private String email;
-	
-	@Column(name="password",nullable=false)
-	@Length(min=8,max=20,message="パスワードは８文字〜２０文字以内にしてください")
-	@Pattern(regexp="[a-zA-Z0-9]+",message="パスワードが不正です",groups=Group1.class)
+
+	@Column(name = "password", nullable = false)
+	@Length(min = 8, max = 20, message = "パスワードは８文字〜２０文字以内にしてください")
+	@Pattern(regexp = "[a-zA-Z0-9]+", message = "パスワードが不正です", groups = Group1.class)
 	private String password;
-	
+
 	@Column
 	private String uuid;
 
@@ -88,7 +87,5 @@ public class CopyAccount {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-	
 
-	
 }

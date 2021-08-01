@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="app.css">
+<style th:fragment="frag_style">
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- ログイン -->
+<div th:fragment="frag_header_login">
+<div id ="header">
+<table align="right"id="table">
+<tr>
+<td>
+<a href="/contactus" id="link">お問い合わせ</a>
+<a href="/login" id="link">ログイン</a>
+<a href="/signup" id="link">新規登録</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+
+<!-- ログアウト -->
+<div th:fragment="frag_header_logout">
+<div id ="header">
+<table align="right"id="table">
+<tr>
+<td>
+<a th:href="@{/articles}" id="link">新規投稿</a>
+<a th:href="@{/mypage}" id = link>マイページへ</a>
+<a th:href="@{/contactus}" id="link">お問い合わせ</a>
+<a th:href="@{/logout}" id="link">ログアウト</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+
+<!-- 新規登録 -->
+<div th:fragment="frag_header_new">
+<div id ="header">
+<table align="right"id="table">
+<tr>
+<td>
+<a href="/contactus" id="link">お問い合わせ</a>
+<a href="/signup" id="link">新規登録</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="fotter">
+</div>
+
+<!-- カテゴリ -->
+<div th:fragment="frag_category">
+<span id="tab">資格一覧</span><br/>
+<div th:each="obj : ${categoryList}">
+<a href="#" th:text="${obj.value}" th:data-category="${obj.key}"></a><br/>
+</div>
+<input type="text" name="search" size="28" id="titleSearch"placeholder="記事のタイトルまたはタグで検索"/>
+</div>
+
+</body>
+</html>

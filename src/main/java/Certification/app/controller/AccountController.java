@@ -16,48 +16,50 @@ import org.springframework.web.bind.annotation.RequestParam;
 import Certification.app.groups.GroupOrder;
 import Certification.app.model.Account;
 import Certification.app.model.CopyAccount;
+import Certification.app.service.AccountCheckService;
 import Certification.app.service.AccountService;
 import Certification.app.service.UserCheckService;
 
-
-
 @Controller
 public class AccountController {
-	
+
 	@Autowired
 	AccountService accountService;
+
+	@Autowired
+	UserCheckService userCheck;
 	
 	@Autowired
-	UserCheckService usercheck;
-	
-	
-	@RequestMapping(value="signup",method=RequestMethod.GET)
-	public String getsignup() {
+	AccountCheckService accountCheck;
+
+	@RequestMapping(value = {"/signup"}, method = RequestMethod.GET)
+	public String getSignup() {
+		Account account = accountCheck.checkAuthentication();
+		if(account != null) {
+			return "logout";
+		}
 		return "new";
 	}
-	
-	@RequestMapping(value="signup",method=RequestMethod.POST)
-	public String postsignup(Model model,
-			@ModelAttribute("account")@Validated(GroupOrder.class) CopyAccount cpAccount,BindingResult result,
-			@RequestParam("repass")String repass) {
-		if(result.hasErrors()) {
+
+	@RequestMapping(value = {"/signup"}, method = RequestMethod.POST)
+	public String postSignup(Model model, @ModelAttribute("account") @Validated(GroupOrder.class) CopyAccount cpAccount,
+			BindingResult result, @RequestParam("rePass") String rePass) {
+		if (result.hasErrors()) {
 			String str = "";
-			for(ObjectError error : result.getAllErrors()) {
+			for (ObjectError error : result.getAllErrors()) {
 				str += error.getDefaultMessage();
-				
+
 			}
-			System.out.println(str);
-		return "redirect:signup";
+			return "redirect:signup";
 		}
-		//パスワード再確認用
-		if(!repass.equals(cpAccount.getPassword())) {
-			model.addAttribute("errorMessage","パスワードが一致しませんでした");
+		// パスワード再確認用
+		if (!rePass.equals(cpAccount.getPassword())) {
+			model.addAttribute("errorMessage", "パスワードが一致しませんでした");
 			System.out.println("パスワードが不一致");
 			return "redirect:signup";
 		}
-		
-		return usercheck.check(cpAccount);
+
+		return userCheck.check(cpAccount);
 	}
-	
 
 }

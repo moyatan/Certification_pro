@@ -25,7 +25,7 @@ public class Favorites {
 	Articles articles;
 	
 	//1人のユーザーに対してお気に入りは一つまで？
-	@OneToOne
+	@ManyToOne
 	Account account;
 	
 	public Favorites() {

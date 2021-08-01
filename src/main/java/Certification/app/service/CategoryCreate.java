@@ -16,7 +16,7 @@ public class CategoryCreate {
 	@Autowired
 	CategoryRepository categoryrepository;
 	
-	public Map<Long,String> categorycreate(){
+	public Map<Long,String> createMap(){
 	List<CategoryModel> categoryList =  categoryrepository.findAll();
 	Map<Long,String> categoryMap = new LinkedHashMap<Long,String>();
 	for(CategoryModel category : categoryList) {

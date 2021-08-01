@@ -11,11 +11,11 @@ import lombok.Data;
 
 @Data
 @Component
-@Scope(value="session", proxyMode=ScopedProxyMode.TARGET_CLASS)
-public class SessionData implements Serializable{
-	
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class SessionData implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	UserDetails account;
 
 	public UserDetails getAccount() {
@@ -25,5 +25,5 @@ public class SessionData implements Serializable{
 	public void setAccount(UserDetails account) {
 		this.account = account;
 	}
-	
+
 }
