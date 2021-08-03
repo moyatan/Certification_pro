@@ -58,11 +58,23 @@
 
 <!-- カテゴリ -->
 <div th:fragment="frag_category">
-<span id="tab">資格一覧</span><br/>
-<div th:each="obj : ${categoryList}">
-<a href="#" th:text="${obj.value}" th:data-category="${obj.key}"></a><br/>
-</div>
+<table class="app">
+<thead>
+<tr>
+<th>資格一覧</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="obj : ${categoryList}">
+<td><a href="#" th:text="${obj.value}" th:data-category="${obj.key}"></a></td>
+</tr>
+<tr>
+<td>
 <input type="text" name="search" size="28" id="titleSearch"placeholder="記事のタイトルまたはタグで検索"/>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 </body>

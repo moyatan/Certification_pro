@@ -14,8 +14,6 @@
 		<div th:include="app :: frag_category" id="categoryList"></div>
 		<div>
 			<div id="sortTab">
-				<span id="tab" data-sort="new">最新の記事</span> <span id="tab"
-					data-sort="popular">閲覧数が多い記事</span>
 				<div id="article">
 					<div th:object="${articles}">
 						<p th:text="|投稿者:　*{account.name}|"></p>

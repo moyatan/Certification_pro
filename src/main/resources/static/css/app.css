@@ -1,8 +1,22 @@
 @charset "UTF-8";
 
-#table{
-	margin:20px;
-	
+table.app {
+  border-collapse: collapse;
+  width: 200px;
+  font-size: 15px;
+  margin: 20px;
+  text-align: left;
+}
+table.app th {
+  color: white;
+  background-color: orange;
+  padding: 10px;
+}
+table.app td {
+  color: black;
+  background-color: white;
+  padding: 5px;
+  border-bottom: 2px dotted lightgray;
 }
 #header{
 

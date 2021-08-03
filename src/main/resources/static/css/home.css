@@ -4,20 +4,22 @@
 	justify-content:space-around;
 }
 
-#tab{
-	background-color:#ff8c00;
-	color: #ffffff;
+table.home {
+  border-collapse: collapse;
+  width: 600px;
+  font-size: 15px;
+  margin: 20px;
+  text-align: left;
 }
-#tab1{
-	 border:3px solid #ff8c00;
-     padding:20px;
-     
+table.home th {
+	border:3px white solid;
+  color: white;
+  background-color: orange;
+  padding: 10px;
 }
-#tab2{
-	 border:3px solid #ff8c00;
-     padding:20px;
-}
-#tab3{
-	 border:3px solid #ff8c00;
-     padding:20px;
+table.home td {
+  color: black;
+  background-color: white;
+  padding: 10px;
+  border-bottom: 2px dotted lightgray;
 }

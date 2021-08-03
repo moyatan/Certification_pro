@@ -3,30 +3,38 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
 <link rel="stylesheet" th:href="@{/css/home.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
 <title>会員専用ページ</title>
 </head>
 <body>
- <div th:include="app :: frag_header_logout"></div>
+<div th:include="app :: frag_header_logout"></div>
 <div class="main" id ="categoryList">
 	<div th:include="app :: frag_category" id="category"></div>
-<div>
+
 <div id="sortTab">
-	<span id = "tab" data-sort="new">最新の記事</span>
-	<span id = "tab" data-sort="popular">閲覧数が多い記事</span>
-	<span id = "tab" data-sort="favorite">お気に入りにした記事</span>
+<table class="home">
+<thead>
+<tr>
+<th id = "tab" data-sort="new">最新の記事</th>
+<th id = "tab" data-sort="popular">閲覧数が多い記事</th>
+<th id = "tab" data-sort="favorite">お気に入りにした記事</th>
+</tr>
+</thead>
+<tbody id="article" th:fragment="articleList">
+<tr th:each="obj : ${articlesList}" th:if="${obj.delete_flag == 0}">
+<td colspan="3"><a th:href="@{/articlesShow(id=${obj.id})}"th:text="${obj.title}" id="title"></a>
+<br/>
+<p th:text="${obj.created_at}"></p>
+</td>
+
+</tr>
+</tbody>
+</table>
 	</div>
-		<div id="article" th:fragment="articleList">
-			<div th:each="obj : ${articlesList}">
-			<div th:if="${obj.delete_flag == 0}" id="tab3">
-					<a th:href="@{/articlesShow(id=${obj.id})}"th:text="${obj.title}" id="title"></a>
-					<p th:text="${obj.created_at}"id="message"></p>
-				</div>
-			</div>
-		</div>
 </div>
-</div>
+
+
  <script src="/javascript/home.js"></script>
  <script src="/javascript/category.js"></script>
  <script src="/javascript/title.js"></script>

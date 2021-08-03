@@ -57,6 +57,7 @@ public class MyPageController {
 	@RequestMapping(value={"/edit"},method=RequestMethod.POST)
 	public String postMyPage(Model model,@RequestParam("action")String action,@RequestParam("articleId")long articleId) {
 		article = articlesRepository.findById(articleId);
+		System.out.println(articleId);
 		if(action.equals("edit")) {
 			Map<Long, String> categoryList = categoryCreate.createMap();
 			model.addAttribute("categoryList", categoryList);
