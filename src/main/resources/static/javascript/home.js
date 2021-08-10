@@ -21,7 +21,7 @@
   return response.text();
   }).then(body => {
   console.log('aa',body);
-  article.outerHTML = body;
+  article.innerHTML = body;
   
   });
   }

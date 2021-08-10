@@ -6,61 +6,71 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
 <link rel="stylesheet" th:href="@{/css/home.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/articleShow.css}" type="text/css">
 <title>ゲストページ</title>
 </head>
 <body>
-	<div th:include="app :: frag_header_logout"></div>
-	<div class="main">
-		<div th:include="app :: frag_category" id="categoryList"></div>
-		<div>
-			<div id="sortTab">
-				<div id="article">
-					<div th:object="${articles}">
-						<p th:text="|投稿者:　*{account.name}|"></p>
-						<div>
-							<p th:text="|タイトル：　*{title}|"></p>
-							<p id="favorite">お気に入り</p>
-							<p th:text="${favoriteCount}"></p>
-						</div>
-						<br />
-						<p th:text="*{content}"></p>
-						<br />
-						<div id="p">
-							<p th:text="*{created_at}"></p>
-							<p th:text="*{categorymodel.category}"></p>
-						</div>
-						<br />
-						<hr />
-						<div th:fragment="comment" id="commentArea">
-							<div th:each="obj : ${commentsList}">
-								<div th:if="${obj.account.id == account.id}">
-								<p th:text="|投稿者：　${obj.account.name}|"></p>
-									<p th:text="${obj.content}" style="color:#ff0000;"></p>
-									<p th:text="|投稿日時：　${obj.created_at}|"></p>
-								</div>
-								<div th:unless="${obj.account.id == account.id}">
-								<p th:text="|投稿者：　${obj.account.name}|"></p>
-									<p th:text="${obj.content}"></p>
-									<p th:text="|投稿日時：　${obj.created_at}|"></p>
-								</div>
-								<hr />
-							</div>
-						</div>
-						<br /> コメント
-						<hr />
-						<div>
-							<textarea name="content" cols="50" rows="15" id="comment"></textarea>
-							<br /> <input type="button" value="コメントする" id="button">
-							<input type="hidden" th:value="*{id}" id="articleId">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	<header th:include="app :: frag_header_logout"></header>
+	<section>
+	<div class="outer"th:object="${articles}">
+	<div class="inner">
+	<strong><th:block th:text="*{account.name}"></th:block></strong>さんが
+	<th:block th:text="*{#dates.format(created_at,'yyyy/MM/dd')}"></th:block>に投稿しました
+	<div align="right">
+	<img th:if="${favorite}"src="/images/favorite_0.png" style="width:50px; height:50px;" id="favorite">
+	<img th:unless="${favorite}" src="/images/favorite_1.png" width="50px" height="50px" id="favorite">
 	</div>
+	<h1 th:text="*{title}"></h1>
+	<p th:text="*{categorymodel.category}"></p>
+	<br />
+	<hr />
+	<th:block th:if="*{content}">
+	<th:block th:each="line : *{content.split('\r\n|\r|\n',-1)}">
+	<th:block th:text="${line}"/><br />
+	</th:block>
+	</th:block>
+	</div>
+	<div class="commentList" >
+	<strong>コメント</strong>
+	<hr/>
+	<div th:fragment="comment" id="commentArea">
+	<th:block  th:if="${commentsList}" th:each="obj : ${commentsList}">
+	<th:block th:if="${obj.account.id == account.id}">
+	<strong><th:block th:text="${obj.account.name}"></th:block></strong>
+	<th:block th:text="${#dates.format(obj.created_at,'yyyy/MM/dd')}"></th:block>
+	<img src="/images/check.jpeg" alt="チェックマーク" width="20px" height="20px">
+	<p th:text="${obj.content}"></p>
+	</th:block>
+	<th:block th:unless="${obj.account.id == account.id}">
+	<strong><th:block th:text="${obj.account.name}"></th:block></strong>
+	<th:block th:text="${#dates.format(obj.created_at,'yyyy/MM/dd')}"></th:block>
+	<p th:text="${obj.content}"></p>
+	</th:block>
+	<br/>
+	<hr/>
+	</th:block>
+	</div>
+	</div>
+	<div class="comment">
+	<strong>コメントする</strong>
+	<hr />
+	<div class="commentArea">
+	<div class="textArea">
+	<textarea name="content" id="comment" placeholder="テキストを入力" 
+	style="overflow:scroll; overflow-wrap:break-word; resize:none; height:100px; width:580px;"></textarea>
+	<div align="center">
+	<input type="button" value="投稿" id="button">
+	<div>
+	<input type="hidden" th:value="*{id}" id="articleId">
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<br/>
+	</section>
 	<script src="/javascript/home.js"></script>
-	<script src="/javascript/category.js"></script>
-	<script src="/javascript/title.js"></script>
 	<script src="/javascript/favorite.js"></script>
 	<script src="/javascript/comment.js"></script>
 </body>

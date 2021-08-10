@@ -3,28 +3,27 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
 <link rel="stylesheet" th:href="@{/css/home.css}" type="text/css">
-<link rel="stylesheet" th:href="@{/css/mypage.css}" type="text/css">
-<title>会員専用ページ</title>
+<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<title>ホーム</title>
 </head>
 <body>
- <div th:include="app :: frag_header_login"></div>
+<header th:include="app :: frag_header_login"></header>
+<section>
 <div class="main" id ="categoryList">
 	<div th:include="app :: frag_category" id="category"></div>
-<div>
 <div id="sortTab">
-<table>
+<div class="sort">
+<a href="#"class="sort"id = "tab" data-sort="new">最新の記事</a>
+<a href="#"class="sort"id = "tab" data-sort="popular">閲覧数が多い記事</a>
+</div>
+<div id="article" th:fragment="articleList">
+<table class="home">
 <thead>
-<tr>
-<th id = "tab" data-sort="new">最新の記事</th>
-<th id = "tab" data-sort="popular">閲覧数が多い記事</th>
-</tr>
 </thead>
 <tbody id="article" th:fragment="articleList">
-<tr th:each="obj : ${articlesList}" th:if="${obj.delete_flag == 0}">
+<tr th:each="obj : ${articlesList}">
 <td colspan="3"><a th:href="@{/articlesShow(id=${obj.id})}"th:text="${obj.title}" id="title"></a>
-<p th:text="${obj.view_count}"></p>
 <br/>
 <p th:text="${obj.created_at}"></p>
 </td>
@@ -32,9 +31,35 @@
 </tr>
 </tbody>
 </table>
+<div style="color:orange;font-size:20px;" th:unless="${page.totalPages lt 0}">
+<ul>
+                <li th:class="${page.first} ? 'disabled':''" style="display:inline">
+        <span th:if="${page.first}">←先頭</span>
+                    <a th:if="${not page.first}" th:href="@{${url}(page=1)}">←先頭</a>
+                </li>
+                <li th:class="${page.first} ? 'disabled' : ''" style="display:inline">
+        <a th:if="${not page.first}"th:href="@{${url}(page=${page.number})}">前へ</a>
+        </li>
+                <li th:each='i : ${#numbers.sequence(0, page.totalPages-1)}' th:class="(${i}==${page.number})? 'active' : ''" style="display:inline">
+                    <span th:if='${i}==${page.number}' th:text='${i+1}'>1</span>
+                    <th:block th:unless="${i} lt 0">
+                    <a th:if="${i}!=${page.number}"th:href="@{${url}(page=${i+1})}">
+                        <span th:text='${i+1}'>1</span>
+                    </a>
+                    </th:block>
+                </li>
+                <li th:class="${page.last} ? 'disabled' : ''" style="display:inline">
+                <a th:if="${not page.last}" th:href="@{${url}(page=${page.number + 2})}">次へ</a>
+                <li th:class="${page.last} ? 'disabled':''" style="display:inline">
+                  <span th:if="${page.last}">末尾➝</span>
+                    <a th:if="${not page.last}" th:href="@{${url}(page=(${page.totalPages}))}">末尾➝</a>
+                </li>
+            </ul>
+            </div>
+	</div>
 	</div>
 </div>
-</div>
+</section>
  <script src="/javascript/home.js"></script>
  <script src="/javascript/category.js"></script>
  <script src="/javascript/title.js"></script>

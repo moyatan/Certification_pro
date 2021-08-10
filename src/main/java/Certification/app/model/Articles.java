@@ -40,6 +40,7 @@ public class Articles {
 	//改行も保存
 	@Lob
 	@Column(name="content",nullable=false)
+	@NotEmpty(message="記事の本文を入力してください")
 	private String content;
 	
 	@Column(name="tag",nullable=true)

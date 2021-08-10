@@ -10,10 +10,11 @@
 <title>マイページ</title>
 </head>
 <body>
-	<div th:include="app :: frag_header_logout"></div>
-	<div align="center">
+	<header th:include="app :: frag_header_logout"></header>
+	<br/>
+	<section align="center">
 		<h1>投稿した記事一覧</h1>
-		<form th:action="@{/edit}" method="post">
+		<div class="mypageLayout">
 			<table class="mypage">
 				<thead>
 					<tr>
@@ -37,14 +38,31 @@
 
 						</td>
 						<td>
+	
 							<button type="submit" name="action" value="delete">削除</button>
+							<input
+							type="hidden" th:value="${obj.id}" name="articleId" />
 						</td>
 						</form>
 					</tr>
 				</tbody>
 			</table>
-		</form>
-	</div>
+			<div class="profile">
+			<div class="profileInner">
+			<strong>プロフィール</strong>
+			<figure class="profile-image">
+            <img src="/images/check.jpeg" alt="マイページ画像" width="200" height="200">
+        </figure>
+        <strong><th:block th:text="${account.name}"></th:block></strong>
+        <hr />
+        <a th:href="@{/profileEdit}">プロフィール編集</a>
+			<p>aaaaaa
+			</p>
+			</div>
+			</div>
+			</div>
+		
+</section>
 
 	<script src="/javascript/home.js"></script>
 	<script src="/javascript/category.js"></script>

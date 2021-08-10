@@ -1,0 +1,10 @@
+@charset "UTF-8";
+div.error{
+	background-color:whitesmoke;
+	width:510px;
+	height:auto;
+	margin:auto;
+	border:1px solid red;
+	padding:10px;
+	color:red;
+}

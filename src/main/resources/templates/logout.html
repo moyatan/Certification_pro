@@ -8,10 +8,12 @@
 <title>ログアウト</title>
 </head>
 <body>
- <div th:include="app :: frag_header_logout"></div>
+ <header th:include="app :: frag_header_logout"></header>
+ <section>
  <form th:action="@{/logout}" method="post">
  <p>ログアウトしてください</p>
   <button type="submit">ログアウト</button>
 </form>
+</section>
 </body>
 </html>

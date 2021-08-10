@@ -6,15 +6,16 @@
 
 table.home {
   border-collapse: collapse;
-  width: 600px;
+  width: 800px;
   font-size: 15px;
-  margin: 20px;
+  margin:0px 20px 20px 20px;
   text-align: left;
 }
 table.home th {
-	border:3px white solid;
+
+ 
   color: white;
-  background-color: orange;
+ 
   padding: 10px;
 }
 table.home td {
@@ -23,3 +24,48 @@ table.home td {
   padding: 10px;
   border-bottom: 2px dotted lightgray;
 }
+table.home th:last-child{
+	border-right:none;
+}
+div.outer{
+	margin:auto;
+	width:1400px;
+	height: auto;
+	margin-top:50px;
+}
+div.inner{
+	padding:30px;
+	background-color:white;
+}
+div.commentList{
+	padding:10px 30px 30px 30px;
+	background-color:white;
+	margin-top:10px;
+}
+div.comment{
+	padding:30px;
+	background-color:white;
+	margin-top:20px;	
+}
+a.sort{
+	background-color:orange;
+	width:200px;
+	height:35px;
+	color:white;
+	padding:5px;
+	border-radius:5px 5px 0 0;
+}
+a.sort:first-child{
+	margin-left:20px;
+	margin-right:3px;
+}
+a.sort:nth-child(2){
+	margin-right:3px;
+}
+a.sort:hover{
+	color:white;
+}
+div.sort{
+	display:flex;
+}
+

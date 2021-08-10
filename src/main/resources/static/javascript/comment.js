@@ -13,8 +13,6 @@ const commentButton = document.getElementById('commentButton');
 		}).then(response => {
 			return response.text();
 		}).then(body => {
-			console.log('aa', body);
-			console.log('テキスト');
 			commentArea.outerHTML = body;
 			textarea.value = '';
 			console.log(text);

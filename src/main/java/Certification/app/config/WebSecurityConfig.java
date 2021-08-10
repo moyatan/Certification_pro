@@ -45,12 +45,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", "/login", "/signup",
 						"/sortOrder", "/categorySearch", "/titleSearch", 
 						"/contactus", "/success","/inputFavorite",
-						"/articlesShow","/comment","/edit")
+						"/articlesShow","/comment","/edit","/home")
 				.permitAll() // どのユーザーからでもアクセス可能
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").loginProcessingUrl("/login") // フォーム送信のSubmitURL
 				.usernameParameter("email") // name属性の'username'
 				.passwordParameter("password") // name属性の'password'
-				.defaultSuccessUrl("/articles", true) // 認証が成功した時のURL
+				.defaultSuccessUrl("/", true) // 認証が成功した時のURL
 				.failureUrl("/login?error") // 認証が失敗した時のページ
 				.permitAll().and().sessionManagement().enableSessionUrlRewriting(true).and().csrf()
 				.ignoringAntMatchers("/h2-console/**").and().logout().logoutUrl("/logout").logoutSuccessUrl("/") // ログアウト成功時のページ

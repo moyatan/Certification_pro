@@ -10,7 +10,7 @@
 		}).then(response => {
 			return response.text();
 		}).then(body => {
-			article.outerHTML = body;
+			article.innerHTML = body;
 		})
 			.catch((reason) => {
 				console.log(reason);

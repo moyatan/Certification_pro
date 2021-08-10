@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/mypage.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/home.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<title>マイページ</title>
+</head>
+<body>
+	<header th:include="app :: frag_header_logout"></header>
+	<br/>
+	<section align="center">
+	<div class="test">
+	<p>名前変更</p>
+	<input type="text" th:field="${account.name}"/>
+	<p>自己紹介</p>
+	<textarea name="profile" cols="50" rows="4" maxlength="200"style="resize:none;
+			overflow:scroll; overflow-wrap:break-word;"onkeyup="ShowLength(value);"></textarea>
+			<p id="inputlength">0文字</p>
+	</div>
+	</section>
+<script>
+	function ShowLength( str ) {
+   document.getElementById("inputlength").innerHTML = str.length + "文字";
+}
+</script>
+	</body>
+	</html>

@@ -66,13 +66,15 @@ String URL = "gestArticleShow";
 		articlesRepository.save(article);
 		//記事ごとにコメントを全件
 		List<Comments> commentsList = commentRepository.findAllCommentsByArticlesId(articlesId);
-		Map<Long, String> categoryList = categoryCreate.createMap();
 		Account account = accountCheck.checkAuthentication();
 		if(account != null) {
 		model.addAttribute("account",account);
 		URL = "articlesShow";
 		}
-		model.addAttribute("categoryList", categoryList);
+		Favorites favorite = favoritesService.favoriteCheck(account, articlesId);
+		if(favorite != null) {
+			model.addAttribute("favorite",favorite);
+		}
 		model.addAttribute("commentsList", commentsList);
 		model.addAttribute("articles", article);
 		return URL;
@@ -125,8 +127,15 @@ String URL = "gestArticleShow";
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else {
+				try {
+				favoriteRepository.delete(favorite);
+				System.out.println("削除完了");
+				}catch(Exception e) {
+					System.out.println("削除失敗");
+				}
+			return null;
 			}
-			return "すでにお気に入りにしています";
 		}
 		return "お気に入りは会員限定です";
 	}

@@ -3,36 +3,50 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/article.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/error.css}" type="text/css">
 <meta charset="UTF-8">
 <title>記事投稿画面</title>
 </head>
 <body>
-<div th:include="app :: frag_header_logout"></div>
-<form th:action="@{articles}" method="post">
+<header th:include="app :: frag_header_logout"></header>
+<section>
+<div class="article">
+<th:block th:if="${validationError}" >
+<div class="error">
+<th:block th:each="error : ${validationError}">
+※<th:block th:text="${error}"></th:block>
+<br/>
+</th:block>
+</div>
+</th:block>
+<form th:action="@{articles}"method="post">
 <table align="center">
+<thead>
+</thead>
+<tbody>
+<tr>
+<td><strong>記事のタイトル</strong></td>
+</tr>
+<tr>
+<td>
+<input type="text" name="title" size="70"/>
+</td>
+	</tr>
 	<tr>
 		<td>
-			<span>記事のタイトル</span>
+		<strong>本文</strong>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input type="text" name="title" size="50"/>
+			<textarea name="content" cols="70" rows="20" style="resize:none;
+			overflow:scroll; overflow-wrap:break-word;"></textarea>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<span>本文</span>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<textarea name="content" cols="50" rows="15"></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<span>カテゴリ</span>
+			<strong>カテゴリ</strong>
 		</td>
 	</tr>
 	<tr>
@@ -45,16 +59,22 @@
 	</tr>
 	<tr>
 		<td>
-			<input type="text" name="tag"size="50"placeholder="資格の名称を追加できます"/>
+			<input type="text" name="tag"size="70"placeholder="資格の名称を追加できます"/>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input type="submit" value="投稿する"/>
+		<div align="right">
+			<input type="submit" value="投稿する"style="background-color:#BDD9FE; color:white;
+			width:100px; height:40px"/>
+			</div>
 		</td>
 	</tr>
+	</tbody>
 </table>
 </form>
+</div>
+</section>
 <div id="fotter"></div>
 </body>
 </html>

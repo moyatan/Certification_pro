@@ -1,6 +1,7 @@
 package Certification.app.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import Certification.app.groups.GroupOrder;
 import Certification.app.model.Account;
@@ -28,7 +30,13 @@ import Certification.app.service.CategoryCreate;
 import Certification.app.service.AccountCheckService;
 
 @Controller
+@SessionAttributes("categoryList")
 public class ArticlesController {
+	
+	@ModelAttribute("categoryList")
+	public Map<Long,String> createCategoryList() {
+		return categoryCreate.createMap();
+	}
 
 	@Autowired
 	ArticlesRepository articlesRepository;
@@ -44,9 +52,6 @@ public class ArticlesController {
 
 	@RequestMapping(value = "articles", method = RequestMethod.GET)
 	public String getArticles(Model model) {
-		Map<Long, String> categoryList = categoryCreate.createMap();
-		model.addAttribute("categoryList", categoryList);
-
 		return "articles";
 	}
 
@@ -57,12 +62,12 @@ public class ArticlesController {
 		String URL = "";
 
 		if (result.hasErrors()) {
-			String str = "";
+			List<String> errorList = new ArrayList<String>();
 			for (ObjectError error : result.getAllErrors()) {
-				str += error.getDefaultMessage();
+				errorList.add(error.getDefaultMessage());
 			}
-			System.out.println(str);
-			return "error";
+			model.addAttribute("validationError",errorList);
+			return "articles";
 		}
 
 		// 現在認証されてるユーザー情報のチェック

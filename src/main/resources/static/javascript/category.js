@@ -23,7 +23,7 @@ const categorySearch = (e) => {
 			return response.text();
 		}).then(body => {
 			console.log(body);
-			article.outerHTML = body;
+			article.innerHTML = body;
 		});
 		}
 

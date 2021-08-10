@@ -70,5 +70,29 @@ public class ArticlesService {
 	public List<Articles> articlesList(long id){
 		return articlesRepository.findArticlesListByAccountId(id);
 	}
+	
+	//タイトル　または　タグで検索されてた時に実行
+	
+	//最新の記事を選択時
+	public Page<Articles> articleListByNewOrder_title(Pageable pageable,String title) {
+		return articlesRepository.findAllArticlesByNewOrder_title(pageable,title);
+}
+	public Page<Articles> articleListByNewOrder_category_title(Pageable pageable,long categoryId,String title) {
+	return  articlesRepository.findAllArticlesByNewOrder_category_title(pageable,categoryId,title);
+	}
+	
+	//人気の記事を選択時
+	public Page<Articles> articleListByOrderPopular_title(Pageable pageable,String title) {
 
+		return articlesRepository.findAllArticlesByOrderPopular_title(pageable,title);
+	}
+	
+	public Page<Articles> articleListByOrderPopular_category_title(Pageable pageable,long categoryId,String title) {
+
+		return articlesRepository.findAllArticlesByOrderPopular_category_title(pageable,categoryId,title);
+	}
+	
+	
+	
+	
 }

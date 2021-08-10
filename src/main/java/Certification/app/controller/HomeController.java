@@ -51,13 +51,19 @@ public class HomeController {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	private String title;
 
 
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public String getHome(Model model,
-			Pageable pageable) {
+			Pageable pageable,@RequestParam(name = "page", required = false)String page) {
+		if(page == null) {
+		title="";
+		}
 		categoryId = 0;
+		Page<Articles> articlesList = null;
 		String URL = "";
 		Map<Long, String> categoryList = categoryCreate.createMap();
 		model.addAttribute("categoryList", categoryList);
@@ -67,8 +73,13 @@ public class HomeController {
 		} else {
 			URL = "gesthome";
 		}
-		Page<Articles> articlesList = articlesService.articleListByNewOrder(pageable);
-		model.addAttribute("articlesList",articlesList);
+		if(title != null && !title.isEmpty()) {
+			articlesList = articlesService.getAllArticlesText(pageable, title);
+		}else {
+		articlesList = articlesService.articleListByNewOrder(pageable);
+		}
+		pageSet(model,articlesList);
+		model.addAttribute("title",title);
 		return URL;
 	}
 
@@ -77,6 +88,22 @@ public class HomeController {
 	@RequestMapping(value = { "/sortOrder" }, method = RequestMethod.GET)
 	public String sort(@RequestParam("sortName") String sortName, Model model, Pageable pageable) {
 		Page<Articles> articlesList = null;
+		if(title != null) {
+			if (sortName.equals("new")) {
+				if(this.categoryId == 0) {
+					articlesList = articlesService.articleListByNewOrder_title(pageable,title);
+				}else {
+				articlesList = articlesService.articleListByNewOrder_category_title(pageable,categoryId,title);
+				}
+
+			} else if (sortName.equals("popular")) {
+				if(this.categoryId == 0) {
+					articlesList = articlesService.articleListByOrderPopular_title(pageable,title);
+				}else {
+				articlesList = articlesService.articleListByOrderPopular_category_title(pageable,categoryId,title);
+				}
+			}
+		}else {
 		if (sortName.equals("new")) {
 			if(this.categoryId == 0) {
 				articlesList = articlesService.articleListByNewOrder(pageable);
@@ -91,12 +118,14 @@ public class HomeController {
 			articlesList = articlesService.articleListByOrderPopular_category(pageable,categoryId);
 			}
 			
-		}else if(sortName.equals("favorite")) {
+		}
+		}
+		if(sortName.equals("favorite")) {
 			Account account = accountCheck.checkAuthentication();
 			articlesList = articlesService.articlesListByFavoriteSort(pageable, account.getId());
 			
 		}
-		model.addAttribute("articlesList",articlesList);
+		pageSet(model,articlesList);
 		return "gesthome :: articleList";
 	}
 	
@@ -108,7 +137,7 @@ public class HomeController {
 			Pageable pageable) {
 		this.categoryId = categoryId;
 		Page<Articles> articlesList = articlesService.articlesListByCategorySearch(pageable, categoryId);
-		model.addAttribute("articlesList",articlesList);
+		pageSet(model,articlesList);
 		return "gesthome :: articleList";
 
 	}
@@ -117,11 +146,13 @@ public class HomeController {
 	public String titleSearch(@RequestParam("title") String title, Model model, Pageable pageable) {
 		Page<Articles> articlesList = null;
 		if (title.length() > 0) {
+			this.title=title;
 			articlesList = articlesService.getAllArticlesText(pageable, title);
 		} else {
+			this.title="";
 			articlesList = articlesService.articleListByNewOrder(pageable);
 		}
-		model.addAttribute("articlesList",articlesList);
+		pageSet(model,articlesList);
 		return "gesthome :: articleList";
 	}
 	
@@ -130,5 +161,10 @@ public class HomeController {
 			System.out.println(articles.getId());
 		}
 		
+	}
+	public void pageSet(Model model,Page<Articles> articlesList) {
+		model.addAttribute("page",articlesList);
+		model.addAttribute("articlesList",articlesList.getContent());
+		model.addAttribute("url","/");
 	}
 }

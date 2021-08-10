@@ -50,14 +50,16 @@ public class MyPageController {
 	public String getMyPage(Model model,Pageable pageable) {
 		Account account = accountCheck.checkAuthentication();
 		List<Articles>articlesList = articlesService.articlesList(account.getId());
+		model.addAttribute("account",account);
 		model.addAttribute("articlesList",articlesList);
 		return "mypage";
 	}
 	
 	@RequestMapping(value={"/edit"},method=RequestMethod.POST)
 	public String postMyPage(Model model,@RequestParam("action")String action,@RequestParam("articleId")long articleId) {
+		System.out.println("ここまで");
 		article = articlesRepository.findById(articleId);
-		System.out.println(articleId);
+		System.out.println("articleId:" + articleId);
 		if(action.equals("edit")) {
 			Map<Long, String> categoryList = categoryCreate.createMap();
 			model.addAttribute("categoryList", categoryList);
@@ -65,6 +67,7 @@ public class MyPageController {
 			return "edit";
 			
 		}else if(action.equals("delete")) {
+			System.out.println(article.getId());
 			article.setDelete_flag(1);
 			articlesRepository.saveAndFlush(article);
 		}

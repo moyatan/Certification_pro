@@ -1,0 +1,30 @@
+@charset "UTF-8";
+div.outer{
+	margin:auto;
+	width:1000px;
+	height: auto;
+	margin-top:20px;
+}
+div.inner{
+	padding:30px;
+	background-color:white;
+}
+div.commentList{
+	padding:10px 30px 30px 30px;
+	background-color:white;
+	margin-top:10px;
+}
+div.comment{
+	padding:30px;
+	background-color:white;
+	margin-top:20px;
+	
+}
+div.commentArea{
+	border:1px solid silver;
+	width:600px;
+	margin:auto;
+}
+div.textArea{
+	margin:20px 10px 20px 10px;
+}

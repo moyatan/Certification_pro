@@ -7,7 +7,8 @@
 <title>編集画面</title>
 </head>
 <body>
-<div th:include="app :: frag_header_logout"></div>
+<header th:include="app :: frag_header_logout"></header>
+<section>
 <form th:action="@{execution}" method="post">
 <table align="center">
 	<tr>
@@ -56,6 +57,7 @@
 	</tr>
 </table>
 </form>
+</section>
 <div id="fotter"></div>
 </body>
 </html>
