@@ -70,10 +70,10 @@ String URL = "gestArticleShow";
 		if(account != null) {
 		model.addAttribute("account",account);
 		URL = "articlesShow";
-		}
 		Favorites favorite = favoritesService.favoriteCheck(account, articlesId);
 		if(favorite != null) {
 			model.addAttribute("favorite",favorite);
+		}
 		}
 		model.addAttribute("commentsList", commentsList);
 		model.addAttribute("articles", article);

@@ -4,37 +4,59 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/login.css}" type="text/css">
 <title>ログイン</title> 
 </head>
 <body>
 <header th:include="app :: frag_header_new"></header>
+<dialog id="dialog" th:include="app :: dialog"></dialog>
 <section>
-<div id="login">
+<div class="loginOuter">
+<strong><p align="center">ログイン</p></strong>
+<hr />
+<div class="loginInner">
+<p align="center"th:if="${param.error}" style="color:red">ログインに失敗しました</p>
+<th:block th:if="${error}" th:text="${error}"></th:block>
 <form th:action="@{/login}" method="post" >
-    <table align="center">
-    	<tr>
-    		<td align="center">
-    			ログイン
-    		</td>
-    	</tr>
-    	<tr>
-   			<td>
-   				<input type="text" name="email" size="40"placeholder="メールアドレスまたはユーザーネーム"/>
-   			</td>
-   		</tr>
-   		<tr>
-   			<td>
-   				<input type="password" name="password" size="40" placeholder="パスワード"/>
-   			</td>
-   		</tr>
-   		<tr>
-   			<td>
-   				<a href="/RePassword">パスワードを忘れた人はこちら</a>
-   				<input type="submit" value="ログイン" id="botton"/>
-   			</td>
-   		</tr>
-   	</table>
-   	</form>
+<table align="center">
+	<tr>
+		<td>
+			メールアドレス
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="text" name="email"size="40"placeholder="メールアドレス"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			パスワード
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="password" name="password" size="40" placeholder="パスワード"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<br/>
+		<div align="right">
+			<input type="submit" value="ログイン" id ="botton"style="background-color:orange; color:white;
+			width:100px; height:40px"/>
+			</div>
+		</td>
+	</tr>
+</table>
+</form>
+</div>
+<div align="center">
+<a href="#">パスワードを忘れた人はこちら</a>
+<button id="test">こんにちは</button>
+
+</div>
 </div>
 </section>
+<script src="/javascript/dialog.js"></script>
 </body>

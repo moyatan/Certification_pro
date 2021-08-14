@@ -11,6 +11,7 @@
 </head>
 <body>
 	<header th:include="app :: frag_header_logout"></header>
+	<dialog id="dialog" th:include="app :: dialog"></dialog>
 	<section>
 	<div class="outer"th:object="${articles}">
 	<div class="inner">
@@ -35,10 +36,11 @@
 	<hr/>
 	<div th:fragment="comment" id="commentArea">
 	<th:block  th:if="${commentsList}" th:each="obj : ${commentsList}">
+	<img th:src="${obj.account.profileImage}" style="width:40px; height:40px; border-radius: 50%;">
 	<th:block th:if="${obj.account.id == account.id}">
 	<strong><th:block th:text="${obj.account.name}"></th:block></strong>
 	<th:block th:text="${#dates.format(obj.created_at,'yyyy/MM/dd')}"></th:block>
-	<img src="/images/check.jpeg" alt="チェックマーク" width="20px" height="20px">
+	<img src="/images/check.jpeg" alt="チェックマーク" width="30px" height="30px">
 	<p th:text="${obj.content}"></p>
 	</th:block>
 	<th:block th:unless="${obj.account.id == account.id}">
@@ -70,8 +72,8 @@
 	</div>
 	<br/>
 	</section>
-	<script src="/javascript/home.js"></script>
 	<script src="/javascript/favorite.js"></script>
 	<script src="/javascript/comment.js"></script>
+	<script src="/javascript/dialog.js"></script>
 </body>
 </html>

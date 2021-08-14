@@ -24,10 +24,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		try {
 		Account account = userRepository.findByEmail(email);
-
-		
+		if(account == null) {
+			throw new UsernameNotFoundException("user not found");
+		}
 		return account;
 	}catch(UsernameNotFoundException e) {
+		System.out.println("ユーザーが見つからない");
 		throw new UsernameNotFoundException("user not found",e);
 	}
 }

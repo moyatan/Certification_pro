@@ -14,7 +14,7 @@
 <h1><a href="/">ShikaChat</a></h1>
 <nav>
 <ul class="header">
-<li><a href="/contactus">お問い合わせ</a></li>
+<li><a href="#" id="contactus">お問い合わせ</a></li>
 <li><a href="/login">ログイン</a></li>
 <li><a href="/signup">新規登録</a></li>
 </ul>
@@ -28,8 +28,7 @@
 <ul class="header">
 <li><a th:href="@{/articles}">新規投稿</a></li>
 <li><a th:href="@{/mypage}">マイページへ</a></li>
-<li><a th:href="@{/contactus}">お問い合わせ</a></li>
-<li><a th:href="@{/logout}">ログアウト</a></li>
+<li><a href="#" id="contactus">お問い合わせ</a></li>
 </ul>
 </nav>
 </header>
@@ -39,7 +38,7 @@
 <h1><a href="/">ShikaChat</a></h1>
 <nav>
 <ul class="header">
-<li><a href="/contactus">お問い合わせ</a></li>
+<li><a href="#" id="contactus">お問い合わせ</a></li>
 <li><a href="/signup">新規登録</a></li>
 </ul>
 </nav>
@@ -53,6 +52,29 @@
 </ul>
 <input type="text" name="search" size="28" id="titleSearch"placeholder="記事のタイトルまたはタグで検索"th:value="${title}"/>
 </div>
+
+<dialog th:fragment="dialog">
+<strong><p align ="center">お問い合わせフォーム</p></strong>
+<hr />
+<p id="errorText" style="color:red;">未入力の内容があります</p>
+<label>
+<select id="dialogSelect">
+<option value=""  selected>----選択----</option>
+<option value="ほげほげ">ほげほげaaaaaaaaaa</option>
+<option value="やふー">やふー</option>
+<option value="テスト">テスト</option>
+</select>
+</label>
+<br />
+<textarea id="dialogText" placeholder="お問い合わせ内容を入力してください" 
+	style="overflow:scroll; overflow-wrap:break-word; resize:none; height:80px; width:400px;"></textarea>
+<br />
+<br />
+<div align="center">
+<button type="submit" id="submit" style="width:100px;height:40px; background-color:orange; color:white;">送信</button>
+<button type="submit" id="close" style="width:100px; height:40px; background-color:silver; color:white;">キャンセル</button>
+</div>
+</dialog>
 
 </body>
 </html>

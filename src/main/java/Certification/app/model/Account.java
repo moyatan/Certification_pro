@@ -40,6 +40,13 @@ public class Account implements UserDetails{
 	@Column(name="password",nullable=false)
 	private String password;
 	
+	@Column(name="profile",nullable=true)
+	@Length(max=200,message="プロフィールは200文字以内に収まるようにしてください")
+	private String profile;
+	
+	@Column(name="profileImage",nullable=true)
+	private String profileImage;
+	
 	@OneToMany(cascade=CascadeType.ALL)
 	@Column(nullable=true)
 	private List<Favorites> favorites;
@@ -47,6 +54,7 @@ public class Account implements UserDetails{
 	@OneToMany(cascade=CascadeType.ALL)
 	@Column(nullable = true)
 	private List<Articles> articles;
+	
 	
 	public long getId() {
 		return id;
@@ -125,6 +133,22 @@ public class Account implements UserDetails{
 
 	public void setArticles(List<Articles> articles) {
 		this.articles = articles;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
 	}
 	
 	

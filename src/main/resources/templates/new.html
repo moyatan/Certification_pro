@@ -10,6 +10,7 @@
 </head>
 <body>
 <header th:include="app::frag_header_login"></header>
+<dialog id="dialog" th:include="app :: dialog"></dialog>
 <section>
 <div class="signinOuter">
 <strong><p align="center">新規ユーザー登録</p></strong>
@@ -69,8 +70,9 @@
 		<td>
 		<br/>
 		<div align="right">
-			<input type="submit" value="新規登録" id ="botton"style="background-color:#BDD9FE; color:white;
+			<input type="submit" value="新規登録" id ="botton"style="background-color:orange; color:white;
 			width:100px; height:40px"/>
+			<input type="hidden" value="http://localhost:8080/images/test0.jpeg" name="profileImage"/>
 			</div>
 		</td>
 	</tr>
@@ -80,5 +82,6 @@
 <p align="center">※新規登録の際に一度、空メールを送信させていただきます</p>
 </div>
 </section>
+<script src="/javascript/dialog.js"></script>
 </body>
 </html>

@@ -82,7 +82,12 @@ public class HomeController {
 		model.addAttribute("title",title);
 		return URL;
 	}
-
+@RequestMapping(value={"/"},method=RequestMethod.POST)
+public String testtest(Model model,@RequestParam(name="select",required=false)String test) {
+	System.out.println(test);
+	return "login";
+	
+}
 	
 	//記事のソート
 	@RequestMapping(value = { "/sortOrder" }, method = RequestMethod.GET)

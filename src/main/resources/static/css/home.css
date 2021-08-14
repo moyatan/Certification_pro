@@ -68,4 +68,8 @@ a.sort:hover{
 div.sort{
 	display:flex;
 }
+div.pagenation{
+	position: absolute;
+    bottom: 0;
+}
 

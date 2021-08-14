@@ -11,6 +11,7 @@
 </head>
 <body>
 	<header th:include="app :: frag_header_login"></header>
+	<dialog id="dialog" th:include="app :: dialog"></dialog>
 	<section>
 	<div class="outer"th:object="${articles}">
 	<div class="inner">
@@ -30,6 +31,7 @@
 	<strong>コメント</strong>
 	<hr/>
 	<th:block  th:if="${commentsList}" th:each="obj : ${commentsList}">
+	<img th:src="${obj.account.profileImage}" style="width:40px; height:40px; border-radius: 50%;">
 	<strong><th:block th:text="${obj.account.name}"></th:block></strong>
 	<th:block th:text="${#dates.format(obj.created_at,'yyyy/MM/dd')}"></th:block>
 	<p th:text="${obj.content}"></p>
@@ -43,7 +45,6 @@
 	</div>
 	<br />
 	</section>
-	<script src="/javascript/category.js"></script>
-	<script src="/javascript/title.js"></script>
+<script src="/javascript/dialog.js"></script>
 </body>
 </html>

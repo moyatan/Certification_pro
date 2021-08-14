@@ -24,6 +24,9 @@ public class Profile {
 	@Column(name="profile",nullable=true)
 	@Length(max=200,message="プロフィールは200文字以内に収まるようにしてください")
 	private String profile;
+	
+	@Column(name="profileImage",nullable=true)
+	private String profileImage;
 
 	public long getId() {
 		return id;

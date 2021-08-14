@@ -80,3 +80,8 @@ div.categoryName{
 	padding:10px;
 	font-size:20px;
 }
+dialog{
+	border:2px solid orange;
+	width:500px;
+	
+}

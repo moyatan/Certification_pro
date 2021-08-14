@@ -1,0 +1,17 @@
+div.loginInner{
+	background-color:white;
+	border:2px solid orange;
+	width:700px;
+	margin:auto;
+	margin-top:30px;
+	margin-bottom:20px;
+	padding:20px 0px 20px 0px;
+}
+div.loginOuter{
+	width:1000px;
+	margin:auto;
+	height:auto;
+	background-color:white;
+	padding:20px;
+	border:2px solid orange;
+}

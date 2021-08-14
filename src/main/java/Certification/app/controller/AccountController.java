@@ -82,7 +82,7 @@ public class AccountController {
 	    	send.sendMail(cpAccount);
 			return "redirect:signup";
 		}
-		errorList.add("アカウントあり");
+		errorList.add("すでに登録されているアカウントです");
 		return "new";
 	}
 	}

@@ -5,27 +5,41 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/mypage.css}" type="text/css">
-<link rel="stylesheet" th:href="@{/css/home.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/profileEdit.css}" type="text/css">
 <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
 <title>マイページ</title>
 </head>
 <body>
 	<header th:include="app :: frag_header_logout"></header>
+	<dialog id="dialog" th:include="app :: dialog"></dialog>
 	<br/>
 	<section align="center">
-	<div class="test">
-	<p>名前変更</p>
+	<div class="profileEdit">
+	<strong><p>プロフィール画像</p></strong>
+	<figure class="profile-image">
+            <img th:src="${account.profileImage}" alt="マイページ画像" width="200" height="200" id="profileImage">
+        </figure>
+        <strong><p>画像クリックで画像変更できます</p></strong>
+    <div id="img">
+	<img src="images/test2.jpeg" data-img="2"width="100" height="100">
+	<img src="images/test0.jpeg" data-img="0"width="100" height="100">
+	<img src="images/test1.jpeg" data-img="1"width="100" height="100">
+	<img src="images/test4.jpeg" data-img="4"width="100" height="100">
+	
+	</div>
+        <form th:action="@{/profileEdit}" method="post">
+	<strong><p>名前</p></strong>
 	<input type="text" th:field="${account.name}"/>
-	<p>自己紹介</p>
-	<textarea name="profile" cols="50" rows="4" maxlength="200"style="resize:none;
-			overflow:scroll; overflow-wrap:break-word;"onkeyup="ShowLength(value);"></textarea>
-			<p id="inputlength">0文字</p>
+	<strong><p>自己紹介</p></strong>
+	<textarea th:field="${account.profile}" cols="50" rows="4" maxlength="200"style="resize:none;
+			overflow:scroll; overflow-wrap:break-word;" placeholder="自己紹介を入力してください"></textarea>
+			<br />
+	<input type="submit" value="更新"id="submit"/>
+	<input type="hidden" name="profileImage" th:value="${account.profileImage}" id="hidden"/>
+		</form>
 	</div>
 	</section>
-<script>
-	function ShowLength( str ) {
-   document.getElementById("inputlength").innerHTML = str.length + "文字";
-}
-</script>
+	<script src="/javascript/profileEdit.js"></script>
+	<script src="/javascript/dialog.js"></script>
 	</body>
 	</html>

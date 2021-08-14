@@ -9,6 +9,7 @@
 </head>
 <body>
 <header th:include="app :: frag_header_logout"></header>
+<dialog id="dialog" th:include="app :: dialog"></dialog>
 <section>
 <div class="main" id ="categoryList">
 	<div th:include="app :: frag_category" id="category"></div>
@@ -31,7 +32,7 @@
 </tr>
 </tbody>
 </table>
-<div style="color:orange;font-size:20px;" th:unless="${page.totalPages lt 0}">
+<div class="pagenation"style="color:orange;font-size:20px;" th:unless="${page.totalPages lt 0}">
 <ul>
                 <li th:class="${page.first} ? 'disabled':''" style="display:inline">
         <span th:if="${page.first}">←先頭</span>
@@ -61,6 +62,7 @@
 </div>
 </div>
 </section>
+<script src="/javascript/dialog.js"></script>
  <script src="/javascript/home.js"></script>
  <script src="/javascript/category.js"></script>
  <script src="/javascript/title.js"></script>

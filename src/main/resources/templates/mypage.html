@@ -11,7 +11,7 @@
 </head>
 <body>
 	<header th:include="app :: frag_header_logout"></header>
-	<br/>
+	<dialog id="dialog" th:include="app :: dialog"></dialog>
 	<section align="center">
 		<h1>投稿した記事一覧</h1>
 		<div class="mypageLayout">
@@ -51,21 +51,26 @@
 			<div class="profileInner">
 			<strong>プロフィール</strong>
 			<figure class="profile-image">
-            <img src="/images/check.jpeg" alt="マイページ画像" width="200" height="200">
+            <img th:src="${account.profileImage}" alt="マイページ画像" width="200" height="200">
         </figure>
         <strong><th:block th:text="${account.name}"></th:block></strong>
         <hr />
+        <th:block th:if="${account.profile}">
+	<th:block th:each="line : ${account.profile.split('\r\n|\r|\n',-1)}">
+	<p th:text="${line}"/></p>
+	</th:block>
+	</th:block>
+	</div>
         <a th:href="@{/profileEdit}">プロフィール編集</a>
-			<p>aaaaaa
-			</p>
-			</div>
+        <br />
+        <br />
+        <form th:action="@{/logout}" method="post">
+  <button type="submit" style="width:100px; height:40px; background-color:orange; color:white;">ログアウト</button>
+</form>
 			</div>
 			</div>
 		
 </section>
-
-	<script src="/javascript/home.js"></script>
-	<script src="/javascript/category.js"></script>
-	<script src="/javascript/title.js"></script>
+	<script src="/javascript/dialog.js"></script>
 </body>
 </html>

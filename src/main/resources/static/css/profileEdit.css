@@ -1,0 +1,24 @@
+@charset "UTF-8";
+div.profileEdit{
+	width:700px;
+	min-height: 700px;
+	height:auto;
+	background-color:white;
+	border-radius:10%;
+	margin:auto;
+	border:2px solid orange;
+}
+#img{
+	width:auto;
+	background-color:silver;
+}
+#img img{
+	border-radius:10%;
+}
+#submit{
+	width:100px;
+	height:40px;
+	background-color:orange;
+	color:white;
+
+}

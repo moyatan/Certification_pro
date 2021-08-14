@@ -20,14 +20,19 @@ table.mypage tr:nth-child(1n){
 table.mypage tr:nth-child(2n){
 	background:white;
 }
+
+
 div.mypageLayout{
 	display:flex;
+	align-items: baseline;
 }
 div.profile{
 width:500px;
-height:700px;
+height:auto;
+min-height: 500px;
 background-color:white;
 margin-right:200px;
+border-radius:10%;
 }
 div.profileInner{
 	background-color:white;
@@ -35,6 +40,7 @@ div.profileInner{
 	margin:50px 50px 50px 50px;
 	height:auto;
 	border: 2px solid orange;
+	border-radius:10%;
 }
 
 .profile-image img {

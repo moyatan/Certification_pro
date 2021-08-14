@@ -10,6 +10,7 @@
 </head>
 <body>
 <header th:include="app :: frag_header_logout"></header>
+<dialog id="dialog" th:include="app :: dialog"></dialog>
 <section>
 <div class="article">
 <th:block th:if="${validationError}" >
@@ -75,6 +76,6 @@
 </form>
 </div>
 </section>
-<div id="fotter"></div>
+<script src="/javascript/dialog.js"></script>
 </body>
 </html>

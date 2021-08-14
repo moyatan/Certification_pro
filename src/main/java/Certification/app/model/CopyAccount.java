@@ -32,7 +32,7 @@ public class CopyAccount {
 	private long id;
 
 	@Column(name = "name", nullable = false)
-	@Length(min = 1, max = 20, message = "UserNameは1文字〜２０文字以内にしてください")
+	@Length(min = 1, max = 20, message = "ユーザーネームは1文字〜２０文字以内にしてください")
 	private String name;
 
 	@Column(name = "email")
@@ -44,6 +44,9 @@ public class CopyAccount {
 	@Length(min = 8, max = 20, message = "パスワードは８文字〜２０文字以内にしてください")
 	@Pattern(regexp = "[a-zA-Z0-9]+", message = "パスワードが不正です", groups = Group1.class)
 	private String password;
+	
+	@Column(name="profileImage",nullable=true)
+	private String profileImage;
 
 	@Column
 	private String uuid;
@@ -87,5 +90,13 @@ public class CopyAccount {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
+	
 
 }
