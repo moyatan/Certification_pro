@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/userPage.css}" type="text/css">
+<title><th:block th:text="${userAccount.name}"></th:block>のページ</title>
+</head>
+<body>
+<header th:if="${myAccount}"th:include="app :: frag_header_logout"></header>
+<header th:unless="${myAccount}"th:include="app :: frag_header_login"></header>
+<dialog id="dialog" th:include="app :: dialog"></dialog>
+<section>
+<div class="userPageOuter" >
+<div class="userPageInner">
+<figure><img th:src="${userAccount.profileImage}" alt="マイページ画像"></figure>
+<br />
+<strong><p th:text="${userAccount.name}"></p></strong>
+<hr />
+自己紹介：<br/>
+<th:block th:text="${userAccount.profile}"></th:block>
+</div>
+<div class="userArticlesListOuter">
+<p>投稿した記事一覧</p>
+<div class="userArticlesListInner">
+<th:block th:if="${articlesList}" th:each="obj : ${articlesList}">
+<div class="article">
+<strong><a th:href="@{/articlesShow(id=${obj.id})}"th:text="${obj.title}"></a></strong>
+<br />
+<p th:text="|カテゴリ：${obj.categorymodel.category}|"></p>
+投稿日時：<th:block th:text="${#dates.format(obj.created_at,'yyyy/MM/dd')}"></th:block>
+</div>
+</th:block>
+</div>
+</div>
+</div>
+</section>
+<script src="javascript/dialog.js"></script>
+</body>
+</html>

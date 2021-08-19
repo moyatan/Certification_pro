@@ -1,0 +1,43 @@
+@charset "UTF-8";
+div.userPageOuter{
+	display:flex;
+	align-items: baseline;
+}
+
+div.userPageInner{
+	width:500px;
+	height:auto;
+	background-color:white;
+	border-radius:10%;
+	border:2px solid orange;
+	padding:100px;
+	margin:10px auto;
+}
+
+div.userPageInner img{
+	border-radius:50%;
+	width:200px;
+	height:200px;
+}
+div.userArticlesListOuter{
+	width:800px;
+	height:auto;
+	background-color:white;
+	border:2px solid orange;
+	padding:70px;
+	border-radius:10%;
+	margin:auto;
+}
+div.userArticlesListInner{
+	overflow: scroll;
+	width:auto;
+	height:500px;
+	border:1px solid orange;
+}
+div.article{
+	width:auto;
+	height:auto;
+	background-color:whitesmoke;
+	border-bottom:1px solid black;
+	padding:10px;
+}

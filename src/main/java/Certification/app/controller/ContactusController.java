@@ -25,13 +25,14 @@ public class ContactusController {
 		String message = "カテゴリ:" + selectValue + "\n" + "お問い合わせ内容:" + textValue + "\n" + "お問い合わせ日時:" + datenow;
 		String returnMessage = "";
 		try {
-			SlackSession session = SlackSessionFactory.createWebSocketSlackSession("xoxb-1884296775441-2393416508369-EnABnZO9nyHbC4to2b7gdKDm");
+			SlackSession session = SlackSessionFactory.createWebSocketSlackSession("xoxb-1884296775441-2393416508369-G46LgtyZbV9tAfxoX6feiKcI");
 			session.connect(); //slackに接続
 			SlackChannel channel = session.findChannelByName("general");
 			session.sendMessage(channel,message);
 			session.disconnect();
 			returnMessage = "お問い合わせできました";
 		}catch(Exception e) {
+			System.out.println(e);
 			returnMessage = "お問い合わせ内容の送信に失敗しました";
 		}
 		

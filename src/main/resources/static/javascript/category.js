@@ -1,7 +1,7 @@
 (() => {
 const $categoryList = document.getElementById('categoryList');
 const $category = $categoryList.querySelectorAll('[data-category]');
-console.log($category);
+console.log("aaa",$category);
 let index = 0;
 while (index < $category.length) {
 	$category[index].addEventListener('click', (e) => categorySearch(e));
@@ -10,9 +10,15 @@ while (index < $category.length) {
 
 const categorySearch = (e) => {
 		const $this = e.target;
-		 console.log($this)
+		
+		 let count = 0;
+		 while(count < $category.length){
+		 $category[count].style.color="black";
+		 count++;
+		 }
+		$this.style.color = "orange";
+		
 		const targetVal = $this.dataset.category;
-		console.log(targetVal);
 
 		let article = document.getElementById('article');
 		console.log(article);

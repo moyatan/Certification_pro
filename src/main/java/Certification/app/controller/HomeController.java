@@ -60,7 +60,7 @@ public class HomeController {
 	public String getHome(Model model,
 			Pageable pageable,@RequestParam(name = "page", required = false)String page) {
 		if(page == null) {
-		title="";
+		title=null;
 		}
 		categoryId = 0;
 		Page<Articles> articlesList = null;
@@ -96,6 +96,7 @@ public String testtest(Model model,@RequestParam(name="select",required=false)St
 		if(title != null) {
 			if (sortName.equals("new")) {
 				if(this.categoryId == 0) {
+					System.out.println("aaa");
 					articlesList = articlesService.articleListByNewOrder_title(pageable,title);
 				}else {
 				articlesList = articlesService.articleListByNewOrder_category_title(pageable,categoryId,title);
@@ -154,19 +155,13 @@ public String testtest(Model model,@RequestParam(name="select",required=false)St
 			this.title=title;
 			articlesList = articlesService.getAllArticlesText(pageable, title);
 		} else {
-			this.title="";
+			this.title=null;
 			articlesList = articlesService.articleListByNewOrder(pageable);
 		}
 		pageSet(model,articlesList);
 		return "gesthome :: articleList";
 	}
 	
-	public void favoriteCount(Page<Articles> articlesList,Model model) {
-		for(Articles articles : articlesList) {
-			System.out.println(articles.getId());
-		}
-		
-	}
 	public void pageSet(Model model,Page<Articles> articlesList) {
 		model.addAttribute("page",articlesList);
 		model.addAttribute("articlesList",articlesList.getContent());

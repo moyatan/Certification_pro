@@ -25,9 +25,13 @@
 </thead>
 <tbody id="article" th:fragment="articleList">
 <tr th:each="obj : ${articlesList}">
-<td colspan="3"><a th:href="@{/articlesShow(id=${obj.id})}"th:text="${obj.title}" id="title"></a>
-<br/>
-<p th:text="${obj.created_at}"></p>
+<td colspan="3">
+<strong><a th:href="@{/articlesShow(id=${obj.id})}"th:text="${obj.title}" id="title"></a></strong>
+<br />
+<br />
+<span>お気に入り数：<th:block th:text="${obj.favoriteCount}"></th:block></span><br />
+<span>カテゴリ：<th:block th:text="${obj.categorymodel.category}"></th:block></span><br />
+<span>投稿日時：<th:block th:text="${#dates.format(obj.created_at,'yyyy/MM/dd')}"></th:block></span><br />
 </td>
 </tr>
 </tbody>
@@ -35,8 +39,7 @@
 <div class="pagenation"style="color:orange;font-size:20px;" th:unless="${page.totalPages lt 0}">
 <ul>
                 <li th:class="${page.first} ? 'disabled':''" style="display:inline">
-        <span th:if="${page.first}">←先頭</span>
-                    <a th:if="${not page.first}" th:href="@{${url}(page=1)}">←先頭</a>
+                    <a th:if="${not page.first}" th:href="@{${url}(page=1)}">最初へ</a>
                 </li>
                 <li th:class="${page.first} ? 'disabled' : ''" style="display:inline">
         <a th:if="${not page.first}"th:href="@{${url}(page=${page.number})}">前へ</a>
@@ -52,8 +55,8 @@
                 <li th:class="${page.last} ? 'disabled' : ''" style="display:inline">
                 <a th:if="${not page.last}" th:href="@{${url}(page=${page.number + 2})}">次へ</a>
                 <li th:class="${page.last} ? 'disabled':''" style="display:inline">
-                  <span th:if="${page.last}">末尾➝</span>
-                    <a th:if="${not page.last}" th:href="@{${url}(page=(${page.totalPages}))}">末尾➝</a>
+       
+                    <a th:if="${not page.last}" th:href="@{${url}(page=(${page.totalPages}))}">最後へ</a>
                     
                 </li>
             </ul>

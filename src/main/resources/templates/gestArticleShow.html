@@ -32,7 +32,7 @@
 	<hr/>
 	<th:block  th:if="${commentsList}" th:each="obj : ${commentsList}">
 	<img th:src="${obj.account.profileImage}" style="width:40px; height:40px; border-radius: 50%;">
-	<strong><th:block th:text="${obj.account.name}"></th:block></strong>
+	<strong><a th:href="@{/userPage(id=${obj.account.id})}" th:text="${obj.account.name}"></a></strong>
 	<th:block th:text="${#dates.format(obj.created_at,'yyyy/MM/dd')}"></th:block>
 	<p th:text="${obj.content}"></p>
 	<br/>

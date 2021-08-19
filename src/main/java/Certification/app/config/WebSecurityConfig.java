@@ -44,8 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/", "/login", "/signup",
 						"/sortOrder", "/categorySearch", "/titleSearch", 
-						"/contactus", "/success","/inputFavorite",
-						"/articlesShow","/comment","/edit","/home")
+						"/contactus", "/success","/userPage",
+						"/articlesShow","/home")
 				.permitAll() // どのユーザーからでもアクセス可能
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").loginProcessingUrl("/login") // フォーム送信のSubmitURL
 				.usernameParameter("email") // name属性の'username'
